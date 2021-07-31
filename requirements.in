@@ -1,0 +1,5 @@
+pyjwt[crypto]
+robotframework
+robotframework-jsonlibrary
+robotframework-zoomba
+webdrivermanager

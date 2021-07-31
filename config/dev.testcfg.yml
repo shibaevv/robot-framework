@@ -1,0 +1,6 @@
+---
+environment: "dev"
+url_prefix: "/dev/"
+target_stack: "active"
+extranet_domain: "dev.company.com.au"
+# vim:ft=yaml
