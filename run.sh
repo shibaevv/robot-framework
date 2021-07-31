@@ -24,8 +24,8 @@ function s3_upload() {
     local CommitId="$(date)"
     local test_bucket=s3://"${aws_ci_build_account_id}"-"${build_data_stackname}"-test-reports
     # DeploymentId to be added to s3_test_report_path once implemented with other aspects of the pipeline.
-    local s3_pm_test_report_path="${test_bucket}/${CommitId}/${test_environment}/${test_origin}/"
-    aws s3 sync "$TEST_REPORT_DIR" "${s3_pm_test_report_path}"
+    local s3_test_report_path="${test_bucket}/${CommitId}/${test_environment}/${test_origin}/"
+    aws s3 sync "$TEST_REPORT_DIR" "${s3_test_report_path}"
   fi
 }
 
