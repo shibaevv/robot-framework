@@ -43,11 +43,19 @@ function run_collection() {
   ROBOT_OPTS="-d $TEST_REPORT_DIR/$collection"
   robot_command="robot $ROBOT_OPTS $collection"
   # Execute `script` based on OS
-  if [ $(uname) == "Darwin" ]; then
+  if [ $(uname) == "Linux" ]; then
+    { # try
+      script -c "$robot_command" --return "$report_file"  # Linux `script`
+    } || { # catch
+      # save log for exception
+      #ex_code = $?
+      echo ">>> $robot_command failed."
+    }
+  elif [ $(uname) == "Darwin" ]; then
     script $report_file $robot_command  # BSD `script`
   else
     { # try
-      script -c "$robot_command" --return "$report_file"  # Linux `script`
+      bash -c "$robot_command" --return "$report_file"  # MINGW64 `script`
     } || { # catch
       # save log for exception
       #ex_code = $?
@@ -67,13 +75,12 @@ function run_collection() {
 }
 
 function main() {
+  export test_environment=${test_environment:dev}
+  export test_origin=${test_origin:-internet}
   if [ $(uname) == "Darwin" ]; then
     #export AWS_PROFILE=dev
     # allow multithreading applications or scripts under the new macOS High Sierra security rules
     export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-    export test_environment=${test_environment:dev}
-    export test_origin=${test_origin:-internet}
-    export target_stack=${target_stack:-active}
   fi
 
   local rc=0
@@ -102,7 +109,7 @@ function main() {
   elif [ $(uname) == "Darwin" ]; then
     echo "manual install for $(uname)"
     # pip install -r requirements.txt
-  elif [ $(uname) == "Windows" ]; then
+  else
     echo "manual install for $(uname)"
     # pip install -r requirements.txt
   fi
@@ -126,7 +133,7 @@ function main() {
     done
     set -e
   else
-    echo "Unsupported test origin"
+    echo "Unsupported test origin: ${test_origin}"
     exit 1
   fi
 
