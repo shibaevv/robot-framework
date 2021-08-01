@@ -2,4 +2,5 @@ pyjwt[crypto]
 robotframework
 robotframework-jsonlibrary
 robotframework-zoomba
+robotframework-confluentkafkalibrary
 webdrivermanager

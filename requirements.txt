@@ -18,6 +18,8 @@ cffi==1.14.5
     # via cryptography
 chardet==3.0.4
     # via requests
+confluent-kafka==1.5.0
+    # via robotframework-confluentkafkalibrary
 coverage==5.5
     # via robotframework-jsonlibrary
 cryptography==3.4.6
@@ -71,6 +73,7 @@ robotframework==3.2.2
     # via
     #   -r requirements.in
     #   robotframework-appiumlibrary
+    #   robotframework-confluentkafkalibrary
     #   robotframework-jsonlibrary
     #   robotframework-requests
     #   robotframework-seleniumlibrary
@@ -78,6 +81,8 @@ robotframework==3.2.2
     #   robotframework-zoomba
 robotframework-appiumlibrary==1.5.0.7
     # via robotframework-zoomba
+robotframework-confluentkafkalibrary==1.5.0.post7
+    # via -r requirements.in
 robotframework-jsonlibrary==0.3.1
     # via -r requirements.in
 robotframework-pythonlibcore==2.2.1
