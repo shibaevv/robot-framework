@@ -23,6 +23,13 @@
     pip install -r requirements.txt
 
 # References
+* [Robot Framework](https://robotframework.org/)
 * [Installing Python 3 on Windows](https://www.python.org/downloads/windows/)
 * [Installing Python 3 on Mac OS X](https://docs.python-guide.org/starting/install3/osx/)
 * [Installing pip](https://pip.pypa.io/en/stable/installation/)
+
+# Libraries:
+* [ConfluentKafkaLibrary](https://github.com/robooo/robotframework-ConfluentKafkaLibrary)
+* [ConfluentKafkaLibrary API](https://robooo.github.io/robotframework-ConfluentKafkaLibrary/)
+* [confluent_kafka API](https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/index.html)
+
