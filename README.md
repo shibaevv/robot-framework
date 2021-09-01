@@ -26,6 +26,7 @@
 * [Robot Framework](https://robotframework.org/)
 * [Installing Python 3 on Windows](https://www.python.org/downloads/windows/)
 * [Installing Python 3 on Mac OS X](https://docs.python-guide.org/starting/install3/osx/)
+* [Setting up python's Windows embeddable distribution](https://dev.to/fpim/setting-up-python-s-windows-embeddable-distribution-properly-1081)
 * [Installing pip](https://pip.pypa.io/en/stable/installation/)
 
 # Libraries:
