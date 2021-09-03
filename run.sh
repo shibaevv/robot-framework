@@ -1,6 +1,8 @@
 #!/bin/bash -e
 
 # ./run.sh
+# ./run.sh collections/XXX.robot
+#
 # Run the python tests
 # Expected environment variables:
 # test_environment: the environment to test
@@ -9,7 +11,7 @@
 SCRIPT_DIR="$(cd "$(dirname $0)" && pwd)"
 #ROOT_DIR="$(cd $SCRIPT_DIR && pwd -P)"
 TEST_REPORT_DIR='test_report'
-#CONFIG_FILE="config/${test_environment}.testcfg.yml"
+#CONFIG_FILE="config/${test_environment}.config.yml"
 
 function clean() {
   echo "Cleaning config/test data and test report dir"
@@ -75,6 +77,7 @@ function run_collection() {
 }
 
 function main() {
+  collection=$1
   export test_environment=${test_environment:dev}
   export test_origin=${test_origin:-internet}
   if [ $(uname) == "Darwin" ]; then
@@ -84,7 +87,7 @@ function main() {
   fi
 
   local rc=0
-  local config="tmp/${test_environment}.testcfg.yml"
+  local config="tmp/${test_environment}.config.yml"
   declare -a test_recap=()
   mkdir -p $TEST_REPORT_DIR
   echo  "Running $(python --version) tests in $test_environment from $test_origin"
@@ -116,26 +119,32 @@ function main() {
   echo $(robot --version)
   echo $(rebot --version)
 
+  set +e
   if [ "${test_origin}" == "internet" ]; then
-    set +e
-    for collection in $( find collections -name '*.robot' | sort -r ) ; do
-    #for collection in $( find collections -name '*.robot' -not -path 'collections/sample/*' | sort ) ; do
+    if [ -z $collection ]; then
+      #for collection in $( find collections -name '*.robot' | sort -r ) ; do
+      for collection in $( find collections -name '*.robot' -not -path 'collections/sample/*' | sort ) ; do
         run_collection $collection
-    done
-    set -e
+      done
+    else
+      run_collection $collection
+    fi
   elif [ "${test_origin}" == "extranet" ]; then
     # unfortunately "requests" does not handle encrypted keys so decrypt it first
     export KEY_PATH="$SCRIPT_DIR/ssl/extranet_ssl.unencrypted.key.pem"
     export CERT_PATH="$SCRIPT_DIR/ssl/extranet_ssl.pem"
-    set +e
-    for collection in $( find collections -name '*.robot' -not -path 'collections/sample/*' | sort ) ; do
+    if [ -z $collection ]; then
+      for collection in $( find collections -name '*.robot' -not -path 'collections/sample/*' | sort ) ; do
         run_collection $collection
-    done
-    set -e
+      done
+    else
+      run_collection $collection
+    fi
   else
     echo "Unsupported test origin: ${test_origin}"
     exit 1
   fi
+  set -e
 
   if [ "${rc}" == 0 ]; then
       echo "All the tests passed successfully !"
