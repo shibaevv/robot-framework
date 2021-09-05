@@ -50,6 +50,11 @@
 5. [Installing pip](https://pip.pypa.io/en/stable/installation/)
 
 # Libraries:
+* [BuiltIn](https://robotframework.org/robotframework/latest/libraries/BuiltIn.html)
+* [Collections](https://robotframework.org/robotframework/latest/libraries/Collections.html)
+* [OperatingSystem](https://robotframework.org/robotframework/latest/libraries/OperatingSystem.html)
+* [Zoomba](https://accruent.github.io/robotframework-zoomba/APILibraryDocumentation.html)
+* [JSONLibrary](https://robotframework-thailand.github.io/robotframework-jsonlibrary/JSONLibrary.html)
 * [ConfluentKafkaLibrary](https://github.com/robooo/robotframework-ConfluentKafkaLibrary)
 * [ConfluentKafkaLibrary API](https://robooo.github.io/robotframework-ConfluentKafkaLibrary/)
 * [confluent_kafka API](https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/index.html)
