@@ -20,6 +20,7 @@
 # Configure python 3
     # Windows (git bash)
     # vi ~/.bashrc
+    # vi ~/.bash_profile
     export PYTHON_HOME=/c/Users/<user>/AppData/Local/Programs/Python/Python39
     export PATH=$PYTHON_HOME:$PYTHON_HOME/Scripts:$PATH
     

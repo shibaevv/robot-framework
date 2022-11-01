@@ -5,13 +5,12 @@
 #
 # Run the python tests
 # Expected environment variables:
-# test_environment: the environment to test
+# TEST_ENVIRONMENT: the environment to test
 # test_origin: the place where the tests are executed: internet or extranet
 
 SCRIPT_DIR="$(cd "$(dirname $0)" && pwd)"
 #ROOT_DIR="$(cd $SCRIPT_DIR && pwd -P)"
 TEST_REPORT_DIR='test_report'
-#CONFIG_FILE="config/${test_environment}.config.yml"
 
 function clean() {
   echo "Cleaning config/test data and test report dir"
@@ -78,19 +77,23 @@ function run_collection() {
 
 function main() {
   collection=$1
-  export test_environment=${test_environment:dev}
+  export test_environment=${TEST_ENVIRONMENT:-dev}
   export test_origin=${test_origin:-internet}
   if [ $(uname) == "Darwin" ]; then
     #export AWS_PROFILE=dev
     # allow multithreading applications or scripts under the new macOS High Sierra security rules
     export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
   fi
+  echo  "Running $(python --version) tests in $test_environment from $test_origin"
+
+  # auto export all variables
+  set -a
+  source ./config/${test_environment}.cfg
+  set +a
 
   local rc=0
-  local config="tmp/${test_environment}.config.yml"
   declare -a test_recap=()
   mkdir -p $TEST_REPORT_DIR
-  echo  "Running $(python --version) tests in $test_environment from $test_origin"
   if [ $(uname) == "Linux" ]; then
     trap clean EXIT
   fi
