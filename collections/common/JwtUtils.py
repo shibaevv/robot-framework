@@ -5,6 +5,7 @@ import jwt
 import random
 import string
 import time
+import uuid
 
 @library(scope='GLOBAL', auto_keywords=True)
 class JwtUtils:
@@ -26,6 +27,10 @@ class JwtUtils:
     @keyword('Generate Date Expired')
     def dateExpired(self, duration):
         return round(time.time()) + int(duration)
+
+    @keyword('Random UUID')
+    def randomUUID(self):
+        return str(uuid.uuid4())
 
     @keyword('Sign JWT')
     def signJwt(self, claim, privateKey, algorithm, headers):
