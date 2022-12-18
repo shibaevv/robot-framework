@@ -1,5 +1,5 @@
 pyjwt[crypto]
-robotframework>=4.0.3
+robotframework>=4.1.3
 robotframework-jsonlibrary
 robotframework-browser
 robotframework-zoomba
