@@ -26,10 +26,13 @@
     
     # OSX - Installing Python 3 on Mac OS X
     brew install python
-    python --version
+    # Python has been installed as /opt/homebrew/bin/python3
+    # /opt/homebrew/opt/python@3.11/libexec/bin
     # vi ~/.zshrc
     # export PATH=/usr/local/opt/python/libexec/bin:$PATH
-    
+    # vi ~/.zprofile
+    # export PATH=/opt/homebrew/opt/python@3.11/libexec/bin:$PATH
+
     # test install
     python --version
 
@@ -38,10 +41,15 @@
     # python -m pip install --upgrade pip
     pip --version
 
+# install nodejs
+    brew install node
+
 # install/run pip tools
     python -m pip install pip-tools
     pip-compile requirements.in
     pip install -r requirements.txt
+    # https://github.com/MarketSquare/robotframework-browser
+    rfbrowser init
 
 # References
 1. [Robot Framework](https://robotframework.org/)
